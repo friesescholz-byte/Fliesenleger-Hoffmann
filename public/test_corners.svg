@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 768" width="1440" height="768">
+  <!-- Dark Blue Background representing the mountain -->
+  <rect width="1440" height="768" fill="#0A1828" />
+  <!-- Two solid amber corners on top -->
+  <path d="M 0 0 L 520 0 C 460 70, 400 160, 330 220 C 260 280, 230 340, 170 380 C 110 420, 60 400, 0 420 L 0 0 Z" fill="#F59725" />
+  <path d="M 920 0 L 1440 0 L 1440 320 C 1400 310, 1350 300, 1290 280 C 1220 260, 1170 240, 1100 200 C 1030 150, 980 70, 920 0 Z" fill="#F59725" />
+</svg>
