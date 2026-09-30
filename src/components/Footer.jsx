@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ShieldCheck, ArrowRight, Lock } from 'lucide-react';
 import { COMPANY } from '../data/content';
 
 export default function Footer({ onOpenLegal }) {
@@ -144,6 +144,14 @@ export default function Footer({ onOpenLegal }) {
             >
               Datenschutz
             </button>
+            <Link
+              to="/admin"
+              className="hover:text-[#F59725] transition-colors flex items-center gap-1 opacity-60 hover:opacity-100"
+              title="Interner Bereich"
+            >
+              <Lock className="w-3 h-3" />
+              <span>Admin</span>
+            </Link>
           </div>
         </div>
       </div>

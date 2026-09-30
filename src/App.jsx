@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -10,7 +10,12 @@ import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import AboutPage from './pages/AboutPage';
 
-export default function App() {
+const AdminPage = React.lazy(() => import('./pages/AdminPage'));
+
+function AppLayout() {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
+
   const [funnelModalOpen, setFunnelModalOpen] = useState(false);
   const [activeLegalModal, setActiveLegalModal] = useState(null);
 
@@ -35,46 +40,55 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="min-h-screen bg-[#FAF8F5] text-[#111827] flex flex-col font-sans selection:bg-[#C26725]/20 selection:text-[#9A4C16]">
-        {/* Navigation Header */}
-        <Header onOpenFunnel={openFunnelModal} />
+    <div className="min-h-screen bg-[#FAF8F5] text-[#111827] flex flex-col font-sans selection:bg-[#C26725]/20 selection:text-[#9A4C16]">
+      {/* Navigation Header (Hidden on /admin) */}
+      {!isAdmin && <Header onOpenFunnel={openFunnelModal} />}
 
-        {/* Main Content Routed Pages */}
-        <main className="flex-grow">
+      {/* Main Content Routed Pages */}
+      <main className="flex-grow">
+        <React.Suspense fallback={<div className="min-h-screen bg-[#FAF9F6] flex items-center justify-center text-sm font-semibold text-neutral-500">Laden...</div>}>
           <Routes>
             <Route path="/" element={<HomePage onOpenFunnel={openFunnelModal} />} />
             <Route path="/projekte" element={<ProjectsPage onOpenFunnel={openFunnelModal} />} />
             <Route path="/ueber-uns" element={<AboutPage onOpenFunnel={openFunnelModal} />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<HomePage onOpenFunnel={openFunnelModal} />} />
           </Routes>
-        </main>
+        </React.Suspense>
+      </main>
 
-        {/* Footer */}
-        <Footer onOpenLegal={(type) => setActiveLegalModal(type)} />
+      {/* Footer (Hidden on /admin) */}
+      {!isAdmin && <Footer onOpenLegal={(type) => setActiveLegalModal(type)} />}
 
-        {/* Pop-up Lead Funnel Modal (Triggered instantly on any button click) */}
-        {funnelModalOpen && (
+      {/* Pop-up Lead Funnel Modal (Triggered instantly on any button click) */}
+      {funnelModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
+          onClick={closeFunnelModal}
+        >
           <div 
-            className="fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
-            onClick={closeFunnelModal}
+            className="relative max-w-2xl w-full my-8 animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div 
-              className="relative max-w-2xl w-full my-8 animate-in zoom-in-95 duration-200"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <LeadFunnel isModal={true} onClose={closeFunnelModal} />
-            </div>
+            <LeadFunnel isModal={true} onClose={closeFunnelModal} />
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Legal Impressum & Privacy Modals */}
-        <LegalModals 
-          activeModal={activeLegalModal} 
-          onClose={() => setActiveLegalModal(null)} 
-        />
-      </div>
+      {/* Legal Impressum & Privacy Modals */}
+      <LegalModals 
+        activeModal={activeLegalModal} 
+        onClose={() => setActiveLegalModal(null)} 
+      />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <AppLayout />
     </BrowserRouter>
   );
 }

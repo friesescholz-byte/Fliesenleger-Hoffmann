@@ -200,10 +200,10 @@ export const GALLERY_PROJECTS = [
     image: `${R2_BASE}/Fliesenleger-Hoffmann_21.webp`,
   },
   {
-    title: 'Moderne Terrassen- & Eingangsplatten',
+    title: 'Modernes Gäste-Bad mit Designer-Waschtisch',
     location: 'Liebenau',
-    category: 'Außenbereich',
-    scope: 'Frostsichere 2-cm-Keramikplatten auf Stelzlagern verlegt',
+    category: 'Komplettbäder',
+    scope: 'Wandhängendes WC, anthrazitfarbener Waschtisch, sandfarbene Wandverkleidung',
     image: `${R2_BASE}/Fliesenleger-Hoffmann_04.webp`,
   },
   {

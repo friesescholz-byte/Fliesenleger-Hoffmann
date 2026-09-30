@@ -1,21 +1,30 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Eye, X, ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
-import { GALLERY_PROJECTS } from '../data/content';
+import { getStoredProjects, subscribeProjects } from '../utils/projectStore';
 import HeroButton from '../components/HeroButton';
 
 export default function ProjectsPage({ onOpenFunnel }) {
+  const [projects, setProjects] = useState(getStoredProjects);
   const [activeFilter, setActiveFilter] = useState('Alle');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState(null);
+
+  // Subscribe to storage changes from admin uploads/edits
+  useEffect(() => {
+    const unsubscribe = subscribeProjects((updatedList) => {
+      setProjects(updatedList);
+    });
+    return unsubscribe;
+  }, []);
 
   const ITEMS_PER_PAGE = 6;
   const categories = ['Alle', 'Komplettbäder', 'Großformat', 'Walk-In Duschen', 'Wohnbereich', 'Außenbereich'];
 
   // Filter projects by category
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'Alle') return GALLERY_PROJECTS;
-    return GALLERY_PROJECTS.filter((p) => p.category === activeFilter);
-  }, [activeFilter]);
+    if (activeFilter === 'Alle') return projects;
+    return projects.filter((p) => p.category === activeFilter);
+  }, [projects, activeFilter]);
 
   // Total pages
   const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE) || 1;
