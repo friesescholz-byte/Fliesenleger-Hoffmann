@@ -127,29 +127,36 @@ export default function Header({ onOpenFunnel }) {
             </HeroButton>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu Toggle Button with 44px touch target */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-neutral-300 hover:bg-neutral-800 transition-colors"
-            aria-label="Menü öffnen"
+            className="md:hidden w-11 h-11 rounded-xl text-neutral-200 hover:bg-white/10 active:bg-white/15 flex items-center justify-center transition-colors cursor-pointer"
+            aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6 text-[#F59725]" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#091524] border-b border-neutral-800 px-4 pt-4 pb-6 space-y-4 shadow-xl">
-            <div className="flex flex-col space-y-3">
+          <div className="md:hidden bg-[#091524]/98 backdrop-blur-xl border-b border-white/10 px-4 pt-3 pb-6 space-y-4 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col divide-y divide-white/10">
               {navLinks.map((link) => {
+                const isActive = !link.isAnchor && location.pathname === link.path;
+
                 if (link.isHome || link.isAnchor) {
                   return (
                     <button
                       key={link.label}
                       onClick={() => handleNavClick(link)}
-                      className="text-left text-base font-medium text-neutral-200 hover:text-[#EAA228] py-2 border-b border-neutral-800 cursor-pointer"
+                      className={`text-left text-base font-bold py-3.5 flex items-center justify-between transition-colors cursor-pointer ${
+                        link.isHome && location.pathname === '/'
+                          ? 'text-[#F59725]'
+                          : 'text-neutral-200 active:text-[#F59725]'
+                      }`}
                     >
-                      {link.label}
+                      <span>{link.label}</span>
+                      <ArrowRight className="w-4 h-4 opacity-40" />
                     </button>
                   );
                 }
@@ -159,9 +166,12 @@ export default function Header({ onOpenFunnel }) {
                     key={link.label}
                     to={link.path}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-base font-medium text-neutral-200 hover:text-[#EAA228] py-2 border-b border-neutral-800"
+                    className={`text-base font-bold py-3.5 flex items-center justify-between transition-colors ${
+                      isActive ? 'text-[#F59725]' : 'text-neutral-200 active:text-[#F59725]'
+                    }`}
                   >
-                    {link.label}
+                    <span>{link.label}</span>
+                    <ArrowRight className="w-4 h-4 opacity-40" />
                   </Link>
                 );
               })}
@@ -170,12 +180,12 @@ export default function Header({ onOpenFunnel }) {
             <div className="pt-2 space-y-3">
               <a
                 href={`tel:${COMPANY.phoneClean}`}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-lg border border-neutral-700 text-white font-semibold text-sm bg-neutral-900"
+                className="w-full h-12 flex items-center justify-center gap-2.5 rounded-xl border border-white/15 text-white font-bold text-sm bg-white/5 active:bg-white/10 transition-colors shadow-sm"
               >
-                <Phone className="w-4 h-4 text-[#EAA228]" />
-                <span>{COMPANY.phone}</span>
+                <Phone className="w-4 h-4 text-[#F59725]" />
+                <span>Direkt anrufen: {COMPANY.phone}</span>
               </a>
-              <div className="pt-1">
+              <div>
                 <HeroButton
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -185,13 +195,21 @@ export default function Header({ onOpenFunnel }) {
                   className="w-full"
                   icon={ArrowRight}
                 >
-                  Traumbad planen
+                  Traumbad anfragen
                 </HeroButton>
               </div>
             </div>
           </div>
         )}
       </nav>
+
+      {/* Mobile Drawer Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-[-1] md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
     </header>
   );
 }

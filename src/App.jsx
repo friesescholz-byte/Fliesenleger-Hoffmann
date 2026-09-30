@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
@@ -13,6 +13,18 @@ import AboutPage from './pages/AboutPage';
 export default function App() {
   const [funnelModalOpen, setFunnelModalOpen] = useState(false);
   const [activeLegalModal, setActiveLegalModal] = useState(null);
+
+  // Prevent background scroll on mobile when modal is active
+  useEffect(() => {
+    if (funnelModalOpen || activeLegalModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [funnelModalOpen, activeLegalModal]);
 
   const openFunnelModal = () => {
     setFunnelModalOpen(true);

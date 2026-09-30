@@ -94,6 +94,7 @@ export default function ProblemSolution({ onOpenFunnel }) {
               <HeroButton
                 onClick={onOpenFunnel}
                 size="sm"
+                className="w-full sm:w-auto"
                 icon={ArrowRight}
               >
                 Jetzt anfragen

@@ -82,6 +82,7 @@ export default function Statement({ onOpenFunnel }) {
               <HeroButton
                 onClick={onOpenFunnel}
                 size="md"
+                className="w-full sm:w-auto"
               >
                 Vor-Ort-Termin vereinbaren
               </HeroButton>

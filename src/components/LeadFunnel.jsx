@@ -83,7 +83,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
           {isModal && onClose && (
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-[#F59725] text-white hover:text-[#09182B] flex items-center justify-center cursor-pointer shadow-md transition-colors z-20"
+              className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-[#F59725] text-white hover:text-[#09182B] flex items-center justify-center cursor-pointer shadow-md transition-colors z-20"
               aria-label="Modal schließen"
             >
               <X className="w-5 h-5" />
@@ -126,7 +126,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                     1. Was planen Sie für Ihr Zuhause?
                   </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                     {projectOptions.map((opt) => {
                       const Icon = opt.icon;
                       const isSelected = projectType === opt.label;
@@ -138,17 +138,17 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                             setProjectType(opt.label);
                             handleNext();
                           }}
-                          className={`group p-5 rounded-2xl text-left border-2 transition-all duration-200 cursor-pointer flex items-center justify-between gap-4 transform hover:-translate-y-1 ${
+                          className={`group p-4 sm:p-5 rounded-2xl text-left border-2 transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 sm:gap-4 transform active:scale-98 ${
                             isSelected
                               ? 'bg-white/15 border-[#F59725] shadow-lg ring-2 ring-[#F59725]'
                               : 'bg-white/5 border-white/10 hover:border-[#F59725]/60 hover:bg-white/10'
                           }`}
                         >
-                          <div className="flex items-center gap-4">
-                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 ${
+                          <div className="flex items-center gap-3 sm:gap-4">
+                            <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 ${
                               isSelected ? 'bg-[#F59725] text-[#09182B]' : 'bg-white/10 text-white group-hover:bg-[#F59725] group-hover:text-[#09182B]'
                             }`}>
-                              <Icon className="w-6 h-6" strokeWidth={1.75} />
+                              <Icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
                             </div>
                             <div>
                               <p className="font-display font-bold text-sm sm:text-base text-white leading-snug">
@@ -174,7 +174,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                     2. Wie groß ist die Fläche ungefähr?
                   </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                     {sizeOptions.map((opt) => {
                       const isSelected = roomSize === opt.label;
                       return (
@@ -185,7 +185,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                             setRoomSize(opt.label);
                             handleNext();
                           }}
-                          className={`group p-5 rounded-2xl text-left border-2 transition-all duration-200 cursor-pointer transform hover:-translate-y-1 ${
+                          className={`group p-4 sm:p-5 rounded-2xl text-left border-2 transition-all duration-200 cursor-pointer transform active:scale-98 ${
                             isSelected
                               ? 'bg-white/15 border-[#F59725] shadow-lg ring-2 ring-[#F59725]'
                               : 'bg-white/5 border-white/10 hover:border-[#F59725]/60 hover:bg-white/10'
@@ -222,7 +222,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                     3. Wann soll die Sanierung idealerweise starten?
                   </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                     {timeOptions.map((opt) => {
                       const isSelected = timeframe === opt.label;
                       return (
@@ -233,7 +233,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                             setTimeframe(opt.label);
                             handleNext();
                           }}
-                          className={`group p-5 rounded-2xl text-left border-2 transition-all duration-200 cursor-pointer transform hover:-translate-y-1 ${
+                          className={`group p-4 sm:p-5 rounded-2xl text-left border-2 transition-all duration-200 cursor-pointer transform active:scale-98 ${
                             isSelected
                               ? 'bg-white/15 border-[#F59725] shadow-lg ring-2 ring-[#F59725]'
                               : 'bg-white/5 border-white/10 hover:border-[#F59725]/60 hover:bg-white/10'
@@ -286,7 +286,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                         placeholder="z. B. Thomas Meier"
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
+                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-base sm:text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
                       />
                     </div>
 
@@ -300,7 +300,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                         placeholder="z. B. 0170 1234567"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
+                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-base sm:text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
                       />
                     </div>
 
@@ -313,7 +313,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                         placeholder="name@beispiel.de"
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
+                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-base sm:text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
                       />
                     </div>
 
@@ -327,7 +327,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                         placeholder="z. B. 31618 Liebenau oder Marklohe"
                         value={formData.location}
                         onChange={(e) => handleInputChange('location', e.target.value)}
-                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
+                        className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-base sm:text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
                       />
                     </div>
                   </div>
@@ -341,7 +341,7 @@ export default function LeadFunnel({ isModal = false, onClose = null }) {
                       placeholder="z. B. Dachschräge vorhanden, ebenerdige Dusche gewünscht, Altbau..."
                       value={formData.notes}
                       onChange={(e) => handleInputChange('notes', e.target.value)}
-                      className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
+                      className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-base sm:text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-[#F59725] focus:ring-1 focus:ring-[#F59725] transition-colors"
                     />
                   </div>
 

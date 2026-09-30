@@ -16,10 +16,10 @@ export default function LegalModals({ activeModal, onClose }) {
       >
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center cursor-pointer transition-colors"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 w-11 h-11 rounded-full bg-neutral-100 hover:bg-[#F59725] text-neutral-600 hover:text-white flex items-center justify-center cursor-pointer transition-colors shadow-sm"
           aria-label="Schließen"
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </button>
 
         {activeModal === 'impressum' && (

@@ -89,10 +89,10 @@ export default function FAQ({ onOpenFunnel }) {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 shrink-0 w-full sm:w-auto">
             <a
               href={`tel:${COMPANY.phoneClean}`}
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-2"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-3 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-2"
             >
               <Phone className="w-3.5 h-3.5 text-[#F59725]" />
               <span>{COMPANY.phone}</span>
@@ -100,6 +100,7 @@ export default function FAQ({ onOpenFunnel }) {
             <HeroButton
               onClick={onOpenFunnel}
               size="sm"
+              className="w-full sm:w-auto"
             >
               Online anfragen
             </HeroButton>

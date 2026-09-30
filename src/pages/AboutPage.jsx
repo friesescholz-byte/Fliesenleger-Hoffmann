@@ -106,6 +106,7 @@ export default function AboutPage({ onOpenFunnel }) {
                 onClick={onOpenFunnel}
                 variant="dark"
                 size="sm"
+                className="w-full sm:w-auto"
                 icon={ArrowRight}
               >
                 Erstgespräch anfordern
@@ -160,12 +161,12 @@ export default function AboutPage({ onOpenFunnel }) {
 
       {/* Bottom CTA Card */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#09182B] text-white rounded-3xl p-8 sm:p-14 border-2 border-[#F59725]/40 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="relative z-10 max-w-xl text-center md:text-left space-y-3">
+        <div className="bg-[#09182B] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-14 border-2 border-[#F59725]/40 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 text-center md:text-left">
+          <div className="relative z-10 max-w-xl space-y-2 sm:space-y-3">
             <h3 className="font-display font-black uppercase italic text-2xl sm:text-3xl text-white">
               LERNEN WIR UNS KENNEN.
             </h3>
-            <p className="text-sm text-neutral-300 font-normal">
+            <p className="text-xs sm:text-sm text-neutral-300 font-normal">
               Erzählen Sie Kingsley Hoffmann von Ihren Badplänen. Wir vereinbaren einen zeitnahen Vor-Ort-Termin direkt bei Ihnen in der Region.
             </p>
           </div>
@@ -173,6 +174,7 @@ export default function AboutPage({ onOpenFunnel }) {
           <HeroButton
             onClick={onOpenFunnel}
             size="md"
+            className="w-full sm:w-auto shrink-0"
             icon={ArrowRight}
           >
             Jetzt anfragen

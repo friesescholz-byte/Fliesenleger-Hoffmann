@@ -9,7 +9,7 @@ export default function ProjectsPage({ onOpenFunnel }) {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const ITEMS_PER_PAGE = 6;
-  const categories = ['Alle', 'Komplettbäder', 'Großformat', 'Walk-In Duschen', 'Wohnbereich'];
+  const categories = ['Alle', 'Komplettbäder', 'Großformat', 'Walk-In Duschen', 'Wohnbereich', 'Außenbereich'];
 
   // Filter projects by category
   const filteredProjects = useMemo(() => {
@@ -42,27 +42,27 @@ export default function ProjectsPage({ onOpenFunnel }) {
   };
 
   return (
-    <div className="pt-28 sm:pt-36 pb-24 sm:pb-32 bg-[#FAF9F6]">
+    <div className="pt-24 sm:pt-36 pb-20 sm:pb-32 bg-[#FAF9F6]">
       {/* Top Page Header Banner */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
           <h1 className="font-display font-black uppercase italic text-3xl sm:text-5xl lg:text-6xl text-[#09182B] tracking-tight leading-[1.05]">
             UNSERE REALISIERTEN <br />
             <span className="text-[#C66030]">TRAUMBÄDER & PROJEKTE.</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal pt-2 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg text-neutral-600 leading-relaxed font-normal pt-1 sm:pt-2 max-w-2xl mx-auto">
             100 % echte Baustellenaufnahmen aus Liebenau, Marklohe, Steyerberg und dem Landkreis Nienburg. Keine Katalogfotos, sondern gelebte Handwerkskunst.
           </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mt-10">
+        {/* Filter Pills: Horizontally swipeable on mobile, centered wrap on desktop */}
+        <div className="flex items-center gap-2 overflow-x-auto py-3 px-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center mt-6 sm:mt-10 scrollbar-none">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => handleFilterChange(cat)}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-display font-black uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+              className={`px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-display font-black uppercase tracking-wider transition-all duration-200 cursor-pointer shrink-0 whitespace-nowrap active:scale-95 ${
                 activeFilter === cat
                   ? 'bg-[#09182B] text-white shadow-md border-2 border-[#F59725]'
                   : 'bg-white text-neutral-700 hover:text-[#09182B] hover:border-[#F59725]/50 border border-neutral-200/80 shadow-xs'
@@ -183,12 +183,12 @@ export default function ProjectsPage({ onOpenFunnel }) {
         )}
 
         {/* Bottom Call to Action Banner */}
-        <div className="mt-24 bg-[#09182B] text-white rounded-3xl p-8 sm:p-12 border-2 border-[#F59725]/40 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="relative z-10 max-w-xl text-center md:text-left space-y-2">
+        <div className="mt-16 sm:mt-24 bg-[#09182B] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-12 border-2 border-[#F59725]/40 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 text-center md:text-left">
+          <div className="relative z-10 max-w-xl space-y-2">
             <h3 className="font-display font-black uppercase italic text-2xl sm:text-3xl text-white">
               PLANEN SIE EIN ÄHNLICHES PROJEKT?
             </h3>
-            <p className="text-sm text-neutral-300 font-normal">
+            <p className="text-xs sm:text-sm text-neutral-300 font-normal">
               Kingsley Hoffmann berät Sie persönlich vor Ort in Liebenau, Marklohe oder der Region Nienburg – transparent und mit Festpreis-Garantie.
             </p>
           </div>
@@ -197,6 +197,7 @@ export default function ProjectsPage({ onOpenFunnel }) {
             onClick={onOpenFunnel}
             icon={ArrowRight}
             size="md"
+            className="w-full sm:w-auto"
           >
             Vor-Ort-Termin vereinbaren
           </HeroButton>
@@ -204,26 +205,27 @@ export default function ProjectsPage({ onOpenFunnel }) {
 
       </div>
 
-      {/* Lightbox Modal for High-Res Detail View */}
+      {/* Lightbox Modal for High-Res Detail View (Mobile Optimized) */}
       {selectedProject && (
         <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-[#09182B] text-white rounded-2xl overflow-hidden shadow-2xl border-2 border-[#F59725]/40"
+            className="relative max-w-4xl w-full max-h-[92vh] flex flex-col bg-[#09182B] text-white rounded-2xl overflow-hidden shadow-2xl border-2 border-[#F59725]/40 overscroll-contain"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Close Button with generous touch target */}
             <button
               onClick={() => setSelectedProject(null)}
-              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-[#F59725] text-white hover:text-[#09182B] flex items-center justify-center transition-colors cursor-pointer"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-11 h-11 rounded-full bg-black/70 hover:bg-[#F59725] text-white hover:text-[#09182B] flex items-center justify-center transition-colors cursor-pointer shadow-lg"
+              aria-label="Schließen"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* High-Res Photo Stage */}
-            <div className="relative aspect-[16/10] bg-neutral-950 overflow-hidden">
+            <div className="relative aspect-[16/10] max-h-[48vh] sm:max-h-[60vh] bg-neutral-950 overflow-hidden flex items-center justify-center shrink-0">
               <img
                 src={selectedProject.image}
                 alt={selectedProject.title}
@@ -232,12 +234,12 @@ export default function ProjectsPage({ onOpenFunnel }) {
             </div>
 
             {/* Modal Info Footer */}
-            <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
+            <div className="p-4 sm:p-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-white/10 overflow-y-auto">
               <div className="space-y-1">
-                <div className="text-xs text-[#F59725] font-bold uppercase">
+                <div className="text-xs text-[#F59725] font-bold uppercase tracking-wider">
                   <span>{selectedProject.category}</span>
                 </div>
-                <h4 className="font-display font-black text-xl text-white">
+                <h4 className="font-display font-black text-lg sm:text-xl text-white leading-snug">
                   {selectedProject.title}
                 </h4>
                 <p className="text-xs text-neutral-300">
@@ -251,6 +253,7 @@ export default function ProjectsPage({ onOpenFunnel }) {
                   onOpenFunnel();
                 }}
                 size="sm"
+                className="w-full sm:w-auto shrink-0"
               >
                 Dieses Design anfragen
               </HeroButton>
